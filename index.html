@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AuthChain – Barcode Blockchain Product Authentication By Adeeb Ali Software Developer</title>
+<style>
+:root{--bg:#f4f6fb;--surf:#fff;--surf2:#eef1f8;--tx:#0f172a;--mut:#64748b;--bd:#e2e8f0;--pri:#4f46e5;--pri2:#06b6d4;--ok:#059669;--okbg:#d1fae5;--bad:#dc2626;--badbg:#fee2e2;--warn:#d97706;--warnbg:#fef3c7;--sh:0 10px 30px -12px rgba(15,23,42,.18);color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b1020;--surf:#131a2e;--surf2:#1a2340;--tx:#e8ecf8;--mut:#8b97b8;--bd:#25305a;--pri:#818cf8;--pri2:#22d3ee;--ok:#34d399;--okbg:#06382b;--bad:#f87171;--badbg:#431313;--warn:#fbbf24;--warnbg:#3d2c07;--sh:0 10px 30px -12px #000;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0b1020;--surf:#131a2e;--surf2:#1a2340;--tx:#e8ecf8;--mut:#8b97b8;--bd:#25305a;--pri:#818cf8;--pri2:#22d3ee;--ok:#34d399;--okbg:#06382b;--bad:#f87171;--badbg:#431313;--warn:#fbbf24;--warnbg:#3d2c07;--sh:0 10px 30px -12px #000;color-scheme:dark}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;min-height:100vh}
+.wrap{max-width:1100px;margin:auto;padding:0 18px 60px}
+header{display:flex;align-items:center;gap:14px;padding:20px 0;flex-wrap:wrap}
+.logo{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,var(--pri),var(--pri2));display:grid;place-items:center;color:#fff;font-size:22px}
+h1{font-size:1.25rem;margin:0;letter-spacing:-.02em}header small{color:var(--mut);display:block}
+.sp{flex:1}
+nav{display:flex;gap:6px;background:var(--surf);border:1px solid var(--bd);padding:5px;border-radius:14px;overflow-x:auto;box-shadow:var(--sh)}
+nav button{border:0;background:none;color:var(--mut);padding:9px 15px;border-radius:10px;font:inherit;font-weight:600;cursor:pointer;white-space:nowrap}
+nav button.on{background:linear-gradient(135deg,var(--pri),var(--pri2));color:#fff}
+.card{background:var(--surf);border:1px solid var(--bd);border-radius:18px;padding:22px;box-shadow:var(--sh)}
+.grid{display:grid;gap:16px}.g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}.g4{grid-template-columns:repeat(auto-fit,minmax(160px,1fr))}
+.stat b{display:block;font-size:1.9rem;letter-spacing:-.03em}.stat span{color:var(--mut);font-size:.85rem}
+h2{margin:0 0 4px;font-size:1.1rem}p.sub{color:var(--mut);margin:0 0 16px}
+label{display:block;font-size:.8rem;font-weight:600;color:var(--mut);margin:12px 0 5px}
+input,select{width:100%;padding:11px 13px;border-radius:11px;border:1px solid var(--bd);background:var(--surf2);color:var(--tx);font:inherit}
+input:focus,select:focus{outline:2px solid var(--pri);border-color:transparent}
+.btn{border:0;border-radius:11px;padding:11px 18px;font:inherit;font-weight:600;cursor:pointer;background:linear-gradient(135deg,var(--pri),var(--pri2));color:#fff;margin-top:16px}
+.btn.ghost{background:var(--surf2);color:var(--tx);border:1px solid var(--bd)}.btn:disabled{opacity:.5}
+.row{display:flex;gap:10px;flex-wrap:wrap}.row>*{flex:1}
+.res{border-radius:16px;padding:20px;margin-top:18px;border:1px solid}
+.res.ok{background:var(--okbg);border-color:var(--ok)}.res.bad{background:var(--badbg);border-color:var(--bad)}.res.warn{background:var(--warnbg);border-color:var(--warn)}
+.res h3{margin:0 0 6px;font-size:1.3rem}.res.ok h3{color:var(--ok)}.res.bad h3{color:var(--bad)}.res.warn h3{color:var(--warn)}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;margin:12px 0;font-size:.9rem}.kv dt{color:var(--mut)}.kv dd{margin:0;font-weight:600;word-break:break-word}
+.tl{list-style:none;padding:0;margin:14px 0 0;border-left:2px solid var(--bd)}
+.tl li{position:relative;padding:0 0 14px 18px}.tl li::before{content:"";position:absolute;left:-6px;top:6px;width:10px;height:10px;border-radius:50%;background:var(--pri)}
+.tl small{color:var(--mut)}
+.mono{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.76rem;word-break:break-all;color:var(--mut)}
+.blk{border:1px solid var(--bd);border-radius:14px;padding:14px;background:var(--surf2);margin-bottom:12px}
+.blk.bad{border-color:var(--bad);background:var(--badbg)}
+.tag{display:inline-block;padding:2px 9px;border-radius:99px;font-size:.72rem;font-weight:700;background:var(--surf);border:1px solid var(--bd)}
+.bcbox{background:#fff;border-radius:12px;padding:12px;text-align:center;margin-top:14px}.bcbox svg{max-width:100%}
+video{width:100%;border-radius:12px;margin-top:12px;background:#000;display:none}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--tx);color:var(--bg);padding:11px 18px;border-radius:12px;font-weight:600;opacity:0;pointer-events:none;transition:.25s;z-index:20}
+.toast.show{opacity:1}
+.view{display:none;margin-top:18px}.view.on{display:block;animation:in .3s}@keyframes in{from{opacity:0;transform:translateY(6px)}}
+.pill{padding:6px 12px;border-radius:99px;font-weight:700;font-size:.8rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="logo">⛓</div>
+  <div><h1>AuthChain By Adeeb Ali Software Developer</h1><small>Barcode-based blockchain product authentication</small></div>
+  <div class="sp"></div>
+  <span id="chainPill" class="pill"></span>
+  <button class="btn ghost" id="theme" style="margin:0" aria-label="Toggle theme">🌓</button>
+</header>
+<nav id="nav">
+  <button data-v="dash" class="on">Dashboard</button><button data-v="reg">Register</button><button data-v="track">Supply chain</button><button data-v="ver">Verify</button><button data-v="ledger">Ledger</button>
+</nav>
+
+<section class="view on" id="dash">
+  <div class="grid g4" id="stats"></div>
+  <div class="grid g2" style="margin-top:16px">
+    <div class="card"><h2>How it works</h2><p class="sub">Every product carries a unique barcode tied to an immutable ledger.</p>
+      <ol style="padding-left:18px;margin:0;line-height:1.9"><li>Manufacturer registers a product, a unique Code 128 barcode is minted on-chain.</li><li>Each handover (distributor, retailer, sale) is mined into a new SHA-256 block.</li><li>Consumers scan the barcode: no record, tampered chain, or cloned scans reveal a fake.</li></ol>
+      <div class="row"><button class="btn" id="demo">Load demo data</button><button class="btn ghost" id="reset">Reset chain</button></div></div>
+    <div class="card"><h2>Security alerts</h2><p class="sub">Counterfeit attempts detected by the network.</p><div id="alerts"></div></div>
+  </div>
+</section>
+
+<section class="view" id="reg"><div class="grid g2">
+  <form class="card" id="regForm"><h2>Register product</h2><p class="sub">Manufacturer mints a new genuine product on the blockchain.</p>
+    <label>Product name</label><input name="name" required maxlength="60" placeholder="e.g. Aurora Smartwatch X2">
+    <div class="row"><div><label>Brand</label><input name="brand" required maxlength="40" placeholder="Brand"></div><div><label>Batch no.</label><input name="batch" required maxlength="20" placeholder="B-2026-11"></div></div>
+    <div class="row"><div><label>Category</label><select name="cat"><option>Electronics</option><option>Pharmaceuticals</option><option>Cosmetics</option><option>Luxury goods</option><option>Food &amp; beverage</option></select></div><div><label>Manufacturer</label><input name="mfr" required maxlength="40" placeholder="Company name"></div></div>
+    <button class="btn" id="regBtn">Mine block &amp; generate barcode</button></form>
+  <div class="card"><h2>Generated barcode</h2><p class="sub">Attach this Code 128 label to the product packaging.</p><div id="regOut" class="mono">Nothing generated yet.</div></div>
+</div></section>
+
+<section class="view" id="track"><div class="grid g2">
+  <form class="card" id="trForm"><h2>Record handover</h2><p class="sub">Log each custody change. Sold items cannot move again.</p>
+    <label>Product barcode</label><input name="code" list="codes" required placeholder="Select or type barcode"><datalist id="codes"></datalist>
+    <label>Event</label><select name="ev"><option value="TRANSFER">Transfer to distributor / retailer</option><option value="SALE">Sale to end consumer</option></select>
+    <div class="row"><div><label>Receiving party</label><input name="to" required maxlength="40" placeholder="e.g. Metro Distributors"></div><div><label>Location</label><input name="loc" required maxlength="40" placeholder="City, Country"></div></div>
+    <button class="btn" id="trBtn">Mine block</button></form>
+  <div class="card"><h2>Latest movements</h2><p class="sub">Most recent supply-chain events.</p><div id="moves"></div></div>
+</div></section>
+
+<section class="view" id="ver"><div class="card"><h2>Verify authenticity</h2><p class="sub">Enter or scan a barcode to check it against the ledger.</p>
+  <div class="row"><input id="vCode" placeholder="Barcode e.g. AC123456789012" style="flex:3"><button class="btn" id="vBtn" style="margin:0">Verify</button><button class="btn ghost" id="camBtn" style="margin:0">📷 Scan</button></div>
+  <video id="cam" playsinline muted></video><div id="vOut"></div></div></section>
+
+<section class="view" id="ledger"><div class="card"><div class="row" style="align-items:center"><div><h2>Blockchain explorer</h2><p class="sub" style="margin:0">Proof-of-work (hash prefix 000), each block linked to the previous.</p></div>
+  <div style="flex:0 0 auto" class="row"><button class="btn ghost" id="tamper" style="margin:0">Simulate tampering</button><button class="btn ghost" id="repair" style="margin:0">Re-validate</button></div></div>
+  <div id="blocks" style="margin-top:16px"></div></div></section>
+</div>
+<div class="toast" id="toast"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jsbarcode/3.11.6/JsBarcode.all.min.js"></script>
+<script>
+"use strict";
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const PREFIX='000',KEY='authchain.v1',fmt=t=>new Date(t).toLocaleString();
+let chain=[],scans={},alerts=[],bad=[];
+const sha=async s=>[...new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s)))].map(x=>x.toString(16).padStart(2,'0')).join('');
+const payload=b=>JSON.stringify([b.index,b.ts,b.type,b.data,b.prev,b.nonce]);
+async function mine(b){b.nonce=0;for(;;){b.hash=await sha(payload(b));if(b.hash.startsWith(PREFIX))return b;b.nonce++}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify({chain,scans,alerts}))}catch(e){}}
+function load(){try{const d=JSON.parse(localStorage.getItem(KEY));if(d&&d.chain&&d.chain.length){({chain,scans,alerts}=d);return true}}catch(e){}return false}
+async function genesis(){chain=[await mine({index:0,ts:1760000000000,type:'GENESIS',data:{msg:'AuthChain genesis block'},prev:'0'.repeat(64),nonce:0,hash:''})];scans={};alerts=[];save()}
+async function addBlock(type,data){const p=chain[chain.length-1],b={index:p.index+1,ts:Date.now(),type,data,prev:p.hash,nonce:0,hash:''};await mine(b);chain.push(b);save();return b}
+async function validate(){bad=[];for(let i=0;i<chain.length;i++){const b=chain[i];if(await sha(payload(b))!==b.hash||!b.hash.startsWith(PREFIX)||(i&&b.prev!==chain[i-1].hash))bad.push(i)}return !bad.length}
+const events=c=>chain.filter(b=>b.data&&b.data.code===c);
+const toast=m=>{const t=$('#toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2400)};
+const alertAdd=(code,reason)=>{alerts.unshift({ts:Date.now(),code,reason});alerts=alerts.slice(0,30);save()};
+const newCode=()=>'AC'+[...crypto.getRandomValues(new Uint8Array(6))].map(x=>String(x%100).padStart(2,'0')).join('');
+const holder=ev=>{const l=[...ev].reverse().find(e=>e.type!=='REGISTER'&&e.type!=='SALE');return l?l.data.to:ev[0].data.mfr};
+
+function timeline(ev){return '<ul class="tl">'+ev.map(b=>`<li><b>${b.type==='REGISTER'?'Manufactured &amp; registered':b.type==='SALE'?'Sold to consumer':'Transferred'}</b> ${b.type==='REGISTER'?'by '+esc(b.data.mfr):'→ '+esc(b.data.to)}<br><small>${b.type==='REGISTER'?'Batch '+esc(b.data.batch):esc(b.data.loc)} · ${fmt(b.ts)} · Block #${b.index}</small></li>`).join('')+'</ul>'}
+function barcode(code,el){try{JsBarcode(el,code,{format:'CODE128',height:70,displayValue:true,fontSize:16,margin:8})}catch(e){el.outerHTML='<div class="mono">Barcode library unavailable: '+esc(code)+'</div>'}}
+
+async function render(){
+  const ok=await validate(),regs=chain.filter(b=>b.type==='REGISTER'),sold=chain.filter(b=>b.type==='SALE').length;
+  const p=$('#chainPill');p.textContent=ok?'● Chain valid':'● Chain tampered';p.style.cssText=`background:var(${ok?'--okbg':'--badbg'});color:var(${ok?'--ok':'--bad'})`;
+  $('#stats').innerHTML=[['Products',regs.length],['Blocks',chain.length],['Transfers',chain.filter(b=>b.type==='TRANSFER').length],['Sold',sold],['Alerts',alerts.length]].map(([k,v])=>`<div class="card stat"><b>${v}</b><span>${k}</span></div>`).join('');
+  $('#alerts').innerHTML=alerts.length?alerts.slice(0,6).map(a=>`<div class="blk bad"><b>${esc(a.reason)}</b><br><span class="mono">${esc(a.code)}</span><br><small>${fmt(a.ts)}</small></div>`).join(''):'<p class="sub">No alerts. All activity looks genuine.</p>';
+  $('#codes').innerHTML=regs.filter(b=>!events(b.data.code).some(e=>e.type==='SALE')).map(b=>`<option value="${esc(b.data.code)}">${esc(b.data.name)}</option>`).join('');
+  $('#moves').innerHTML=chain.filter(b=>b.type!=='GENESIS').slice(-5).reverse().map(b=>`<div class="blk"><span class="tag">${b.type}</span> <b>${esc(b.data.name||b.data.to)}</b><br><span class="mono">${esc(b.data.code)}</span><br><small>${fmt(b.ts)}</small></div>`).join('')||'<p class="sub">No events yet.</p>';
+  $('#blocks').innerHTML=[...chain].reverse().map(b=>`<div class="blk ${bad.includes(b.index)?'bad':''}"><div class="row" style="align-items:center"><b>Block #${b.index} <span class="tag">${b.type}</span></b><span style="text-align:right;flex:0 0 auto" class="tag">${bad.includes(b.index)?'INVALID':'VALID'}</span></div><div class="mono" style="margin-top:8px">Data: ${esc(JSON.stringify(b.data))}<br>Prev: ${b.prev}<br>Hash: ${b.hash}<br>Nonce: ${b.nonce} · ${b.ts?fmt(b.ts):'genesis'}</div></div>`).join('');
+}
+
+$('#nav').onclick=e=>{const v=e.target.dataset.v;if(!v)return;$$('nav button').forEach(b=>b.classList.toggle('on',b===e.target));$$('.view').forEach(s=>s.classList.toggle('on',s.id===v));render()};
+
+$('#regForm').onsubmit=async e=>{e.preventDefault();const f=Object.fromEntries(new FormData(e.target)),btn=$('#regBtn');btn.disabled=true;btn.textContent='Mining…';
+  const code=newCode(),b=await addBlock('REGISTER',{code,name:f.name.trim(),brand:f.brand.trim(),batch:f.batch.trim(),cat:f.cat,mfr:f.mfr.trim()});
+  $('#regOut').className='';$('#regOut').innerHTML=`<b>${esc(f.name)}</b><div class="bcbox"><svg id="bcSvg"></svg></div><p class="mono">Block #${b.index} · ${b.hash}</p>`;barcode(code,$('#bcSvg'));
+  btn.disabled=false;btn.textContent='Mine block & generate barcode';e.target.reset();toast('Product registered on-chain');render()};
+
+$('#trForm').onsubmit=async e=>{e.preventDefault();const f=Object.fromEntries(new FormData(e.target)),code=f.code.trim().toUpperCase(),ev=events(code);
+  if(!ev.length)return toast('Unknown barcode: not registered');
+  if(ev.some(x=>x.type==='SALE')){alertAdd(code,'Movement attempted after sale: possible counterfeit re-entry');render();return toast('Rejected: product already sold')}
+  const btn=$('#trBtn');btn.disabled=true;btn.textContent='Mining…';
+  await addBlock(f.ev,{code,name:ev[0].data.name,to:f.to.trim(),loc:f.loc.trim()});btn.disabled=false;btn.textContent='Mine block';e.target.reset();toast('Event recorded on-chain');render()};
+
+async function verify(code){code=code.trim().toUpperCase();if(!code)return toast('Enter a barcode');
+  const ok=await validate(),ev=events(code);scans[code]=(scans[code]||0)+1;save();let cls,title,msg,body='';
+  if(!ev.length){cls='bad';title='✖ Counterfeit: not found';msg='This barcode is not registered on the blockchain. Do not trust this product.';alertAdd(code,'Unregistered barcode scanned')}
+  else{const r=ev[0].data,tampered=ev.some(b=>bad.includes(b.index));
+    body=`<dl class="kv"><dt>Product</dt><dd>${esc(r.name)}</dd><dt>Brand</dt><dd>${esc(r.brand)}</dd><dt>Category</dt><dd>${esc(r.cat)}</dd><dt>Batch</dt><dd>${esc(r.batch)}</dd><dt>Manufacturer</dt><dd>${esc(r.mfr)}</dd><dt>Current holder</dt><dd>${ev.some(x=>x.type==='SALE')?'End consumer (sold)':esc(holder(ev))}</dd><dt>Scans</dt><dd>${scans[code]}</dd></dl>`+timeline(ev);
+    if(tampered||!ok&&tampered){cls='bad';title='✖ Tampered record';msg='Blockchain integrity check failed for this product. Its history may have been altered.';alertAdd(code,'Tampered ledger record detected')}
+    else if(scans[code]>5){cls='warn';title='⚠ Suspicious: possible cloned barcode';msg='This barcode has been scanned unusually often. Genuine items are rarely scanned this many times.';alertAdd(code,'Excessive scans: barcode may be cloned')}
+    else{cls='ok';title='✔ Genuine product';msg='Registered by the manufacturer with a valid, untampered custody history.'}}
+  $('#vOut').innerHTML=`<div class="res ${cls}"><h3>${title}</h3><p style="margin:0">${msg}</p>${body}</div>`;render()}
+$('#vBtn').onclick=()=>verify($('#vCode').value);$('#vCode').onkeydown=e=>e.key==='Enter'&&verify(e.target.value);
+
+let stream=null;
+$('#camBtn').onclick=async()=>{const v=$('#cam');
+  if(stream){stream.getTracks().forEach(t=>t.stop());stream=null;v.style.display='none';return}
+  if(!('BarcodeDetector' in window)||!navigator.mediaDevices)return toast('Camera scanning not supported here. Type the code.');
+  try{stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'}});v.srcObject=stream;v.style.display='block';await v.play();
+    const det=new BarcodeDetector({formats:['code_128','ean_13','qr_code']});
+    const loop=async()=>{if(!stream)return;try{const r=await det.detect(v);if(r.length){$('#vCode').value=r[0].rawValue;$('#camBtn').click();return verify(r[0].rawValue)}}catch(e){}requestAnimationFrame(loop)};loop()
+  }catch(e){toast('Camera permission denied')}};
+
+$('#tamper').onclick=async()=>{const t=chain.find(b=>b.type==='REGISTER');if(!t)return toast('Register a product first');t.data={...t.data,name:t.data.name+' (FORGED)'};await render();toast('Block data altered without re-mining')};
+$('#repair').onclick=async()=>{const ok=await validate();await render();toast(ok?'Chain is valid':'Invalid blocks: '+bad.map(i=>'#'+i).join(', '))};
+$('#reset').onclick=async()=>{if(confirm('Erase the entire local blockchain?')){await genesis();render();toast('Chain reset')}};
+$('#theme').onclick=()=>{const r=document.documentElement,d=getComputedStyle(r).colorScheme==='dark';r.dataset.theme=d?'light':'dark'};
+$('#demo').onclick=async()=>{const b=$('#demo');b.disabled=true;b.textContent='Mining demo…';
+  const items=[['Aurora Smartwatch X2','Aurora','Electronics','Aurora Labs'],['VitaCure 500mg','VitaCure','Pharmaceuticals','VitaCure Pharma'],['Lumière Serum','Lumière','Cosmetics','Lumière Paris']];
+  for(const [i,[name,brand,cat,mfr]] of items.entries()){const code=newCode();await addBlock('REGISTER',{code,name,brand,batch:'B-2026-'+(11+i),cat,mfr});
+    await addBlock('TRANSFER',{code,name,to:'Metro Distributors',loc:'Dubai, UAE'});await addBlock('TRANSFER',{code,name,to:'City Retail Store',loc:'Karachi, Pakistan'});if(i===0)await addBlock('SALE',{code,name,to:'Consumer',loc:'Karachi, Pakistan'})}
+  b.disabled=false;b.textContent='Load demo data';toast('Demo data mined. Check the Verify tab');render();
+  $('#vCode').value=chain.find(x=>x.type==='REGISTER').data.code};
+
+(async()=>{if(!load())await genesis();render()})();
+</script>
+</body>
+  </html>
